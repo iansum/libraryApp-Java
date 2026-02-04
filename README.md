@@ -57,30 +57,42 @@ src/
 - Java 8 or higher
 - No external dependencies required (pure Java)
 
-## Compilation
+## Quick Start
 
-To compile the application, navigate to the project root directory and run:
+### Option 1: Using Convenience Scripts (Recommended)
 
+**Linux/Mac:**
+```bash
+# Make scripts executable (first time only)
+chmod +x compile.sh run.sh
+
+# Compile and run
+./run.sh
+```
+
+**Windows:**
+```batch
+# Simply run
+run.bat
+```
+
+### Option 2: Manual Compilation and Execution
+
+**Compile:**
 ```bash
 javac -d out src/main/java/com/library/*.java src/main/java/com/library/**/*.java
 ```
 
-Or compile from the src/main/java directory:
+**Run:**
+```bash
+java -cp out com.library.LibraryApp
+```
+
+### Option 3: Compile from src directory
 
 ```bash
 cd src/main/java
 javac com/library/*.java com/library/**/*.java
-```
-
-## Running the Application
-
-After compilation, run the application:
-
-```bash
-# From project root (if compiled with -d out)
-java -cp out com.library.LibraryApp
-
-# From src/main/java directory (if compiled without -d)
 java com.library.LibraryApp
 ```
 
