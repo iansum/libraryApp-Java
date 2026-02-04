@@ -9,7 +9,9 @@ import java.util.concurrent.TimeUnit;
  * Utility class for date operations
  */
 public class DateUtils {
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    // ThreadLocal to ensure thread-safety of SimpleDateFormat
+    private static final ThreadLocal<SimpleDateFormat> DATE_FORMAT = 
+        ThreadLocal.withInitial(() -> new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
 
     /**
      * Get current date
@@ -43,6 +45,6 @@ public class DateUtils {
         if (date == null) {
             return "N/A";
         }
-        return DATE_FORMAT.format(date);
+        return DATE_FORMAT.get().format(date);
     }
 }

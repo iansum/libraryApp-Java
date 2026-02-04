@@ -1,6 +1,7 @@
 package com.library.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -74,7 +75,7 @@ public class Member {
     }
 
     public List<String> getBorrowedBooks() {
-        return borrowedBooks;
+        return Collections.unmodifiableList(borrowedBooks);
     }
 
     public void setBorrowedBooks(List<String> borrowedBooks) {
@@ -82,7 +83,7 @@ public class Member {
     }
 
     public Date getRegistrationDate() {
-        return registrationDate;
+        return registrationDate != null ? new Date(registrationDate.getTime()) : null;
     }
 
     public void setRegistrationDate(Date registrationDate) {

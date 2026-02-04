@@ -211,16 +211,27 @@ public class Library {
     public List<Book> getOverdueBooks() {
         Date currentDate = DateUtils.getCurrentDate();
         List<Book> overdueBooks = new ArrayList<>();
+        Set<String> processedISBNs = new HashSet<>();
         
-        for (Transaction transaction : transactions) {
+        // Process transactions in reverse order to get most recent borrow for each book
+        for (int i = transactions.size() - 1; i >= 0; i--) {
+            Transaction transaction = transactions.get(i);
+            String isbn = transaction.getIsbn();
+            
+            // Skip if we've already processed this ISBN
+            if (processedISBNs.contains(isbn)) {
+                continue;
+            }
+            
             if (transaction.getTransactionType() == Transaction.TransactionType.BORROW) {
                 // Check if this book is still borrowed
-                Book book = books.get(transaction.getIsbn());
+                Book book = books.get(isbn);
                 if (book != null && !book.isAvailable()) {
                     long daysBorrowed = DateUtils.calculateDaysBetween(transaction.getTransactionDate(), currentDate);
                     if (daysBorrowed > 14) {
                         overdueBooks.add(book);
                     }
+                    processedISBNs.add(isbn);
                 }
             }
         }
@@ -282,16 +293,16 @@ public class Library {
         borrowBook("M002", "9780201633610");
     }
 
-    // Getters for testing/debugging
+    // Getters for testing/debugging - return unmodifiable views to protect internal state
     public Map<String, Book> getBooks() {
-        return books;
+        return Collections.unmodifiableMap(books);
     }
 
     public Map<String, Member> getMembers() {
-        return members;
+        return Collections.unmodifiableMap(members);
     }
 
     public List<Transaction> getTransactions() {
-        return transactions;
+        return Collections.unmodifiableList(transactions);
     }
 }

@@ -228,7 +228,7 @@ ISBN: 9780596009205 | Title: Head First Java | Author: Kathy Sierra | Year: 2005
 
 Possible improvements for future versions:
 - Persistent storage (file-based or database)
-- Fine calculation for overdue books
+- Late fee calculation for overdue books
 - Book reservation system
 - Multiple copies of the same book
 - Advanced reporting and statistics

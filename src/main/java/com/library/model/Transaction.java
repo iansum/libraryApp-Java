@@ -67,7 +67,7 @@ public class Transaction {
     }
 
     public Date getTransactionDate() {
-        return transactionDate;
+        return transactionDate != null ? new Date(transactionDate.getTime()) : null;
     }
 
     public void setTransactionDate(Date transactionDate) {
@@ -75,7 +75,7 @@ public class Transaction {
     }
 
     public Date getDueDate() {
-        return dueDate;
+        return dueDate != null ? new Date(dueDate.getTime()) : null;
     }
 
     public void setDueDate(Date dueDate) {
